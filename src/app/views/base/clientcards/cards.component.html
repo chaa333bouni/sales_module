@@ -1,0 +1,240 @@
+  <!DOCTYPE html>
+  <html lang="fr">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Card Example</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <title>Top Bar with Icons</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <style>
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .top-bar .list-icon, .top-bar .add-icon {
+            margin-right: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .top-bar .add-icon {
+            margin-left: auto;
+        } .card-container {
+          display: flex;
+          flex-wrap: wrap; /* Pour permettre aux cartes de passer à la ligne suivante si nécessaire */
+          gap: 20px; /* Espace entre les cartes */
+          padding: 20px;
+      }
+          .card {
+              width: 18rem;
+              margin: 20px;
+          }
+          .card-img-top {
+              max-height: 100px;
+              max-width: 100px;
+              object-fit: cover;
+          }
+      </style>
+  </head>  
+  <div class="top-bar">
+    <span class="list-icon"(click)="togglelist()">&#9776;</span>
+    <span class="card-container-icon" (click)="toggleCardContainer()">
+      <i class="fas fa-th-large"></i>
+    </span>
+  
+    <span class="add-icon"[routerLink]="['/client']">&#43;</span>
+</div>
+<!-- Card Container -->
+<div class="card-container" *ngIf="showCardContainer  && !showlist">
+  <div class="card" style="width: 18rem;" *ngFor="let item of clientList; let i = index; trackBy: trackByIndex">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-text">{{item.societe}}</h5>
+        <div>
+          <i class="fas fa-pen" style="color: black; cursor: pointer;" (click)="editClient(item)"></i>
+          <i class="fas fa-times ms-2" style="color: black; cursor: pointer;" (click)="deleteClient(i)"></i>
+        </div>
+      </div>
+      <div *ngIf="item.photo">
+        <img [src]="item.photo" alt="Client Image" class="card-img-top" />
+      </div>
+            <p class="card-text" style="margin-bottom: 20px;">{{item.nom}}</p>
+      <p class="card-text" style="margin-bottom: 1px;">{{item.email}}</p>
+      <p class="card-text" style="margin-bottom: 1px;">PME</p>
+      <p class="card-text" style="margin-bottom: 1px;">Companies</p>
+      <p class="card-text" style="margin-bottom: 1px;">Position fiscale:</p>
+    </div>
+  </div>
+</div>
+<div class="table-responsive" *ngIf="showlist && !showCardContainer">
+  <div class="container">
+    <h2 class="my-4">Liste des clients</h2>
+    <table class="table table-striped table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Modifier/Supprimer</th>
+          <th>Référence</th>
+          <th>Nom</th>
+          <th>Tél. fixe</th>
+          <th>Email</th>
+          <th>Catégorie</th>
+          <th>Position fiscale</th>
+          <th>N° SIRET</th>
+          <th>Adresse</th>
+          <th>Code postal</th>
+          <th>Ville</th>
+          <th>Sociétés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clientList; index as i">
+          <td>
+            <button class="btn btn-outline-success btn-sm">Modifier</button>
+          </td>
+          <td>                  </td>
+          <td>{{ client.nom }} {{ client.prenom }}</td>
+          <td>{{ client.numero_telephone }}</td>
+          <td>{{ client.email }}</td>
+          <td>                  </td>
+          <td>                  </td>
+          <td>                  </td>
+          <td>                  </td>
+          <td>                  </td>
+          <td>                  </td>
+          <td>                  </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal Heading</h5>
+        <button type="button" class="btn-close" (click)="closeeemodel()"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Individu Section -->
+        <label for="clientTypeSelect" class="form-label">Type de Client</label>
+        <select id="clientTypeSelect" [(ngModel)]="selectedType" class="form-select form-select-sm">
+          <option value="société">Société</option>
+          <option value="individu">Individu</option>
+        </select>
+
+        <div *ngIf="selectedType === 'individu'">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="civiliteInput" class="form-label">Civilité</label>
+              <select id="civiliteInput" class="form-select form-select-sm">
+                <option value="Monsieur">Monsieur</option>
+                <option value="Madame">Madame</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="nomInput" class="form-label">Nom</label>
+              <input type="text" id="nomInput" [(ngModel)]="Clientobj.nom" class="form-control form-control-sm" placeholder="Nom">
+            </div>
+            <div class="col-md-4">
+              <label for="prenomInput" class="form-label">Prénom</label>
+              <input type="text" id="prenomInput" [(ngModel)]="Clientobj.prenom" class="form-control form-control-sm" placeholder="Prénom">
+            </div>
+          </div>
+        </div>
+        
+        <div *ngIf="selectedType === 'société'">
+          <div class="mb-3">
+            <label for="nomSocieteInput" class="form-label">Nom de la Société</label>
+            <input type="text" id="nomSocieteInput"[(ngModel)]="Clientobj.societe"class="form-control form-control-sm" placeholder="Nom de la Société">
+          </div>
+        </div>
+
+        <!-- Informations Section -->
+        <h5 class="mt-4">Informations</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="adressePostaleInput" class="form-label">Adresses postales</label>
+            <textarea id="adressePostaleInput" rows="2" class="form-control form-control-sm"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label for="telephoneInput" class="form-label">Tél. fixe</label>
+            <input type="text" id="telephoneInput" class="form-control form-control-sm" [(ngModel)]="Clientobj.numero_telephone" placeholder="+33100000000">
+          </div>
+          <div class="col-md-4">
+            <label for="faxInput" class="form-label">Fax</label>
+            <input type="text" id="faxInput" class="form-control form-control-sm" placeholder="+33000000000">
+          </div>
+        </div>
+        <div class="row g-3 mt-3">
+          <div class="col-md-4">
+            <label for="numeroMobileInput" class="form-label">N° Mobile</label>
+            <input type="text" id="numeroMobileInput" class="form-control form-control-sm" placeholder="+33100000000">
+          </div>
+          <div class="col-md-4">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="email" id="emailInput" class="form-control form-control-sm" [(ngModel)]="Clientobj.email" placeholder="whatever@example.com">
+          </div>
+          <div class="col-md-4">
+            <label for="siteWebInput" class="form-label">Site Web</label>
+            <input type="url" id="siteWebInput" class="form-control form-control-sm" placeholder="http://www.url.com">
+          </div>
+        </div>
+
+        <!-- Détails du tiers Section -->
+        <h5 class="mt-4">Détails du tiers</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="categorieInput" class="form-label">Catégorie</label>
+            <input type="text" id="categorieInput" class="form-control form-control-sm" placeholder="Catégorie">
+          </div>
+          <div class="col-md-4">
+            <label for="secteurActiviteInput" class="form-label">Secteur d'Activité</label>
+            <input type="text" id="secteurActiviteInput" class="form-control form-control-sm" placeholder="Secteur d'Activité">
+          </div>
+          <div class="col-md-4">
+            <label for="provenanceInput" class="form-label">Provenance</label>
+            <input type="text" id="provenanceInput" class="form-control form-control-sm" placeholder="Provenance">
+          </div>
+        </div>
+
+        <!-- Paramètres Section -->
+        <h5 class="mt-4">Paramètres</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="langueInput" class="form-label">Langue</label>
+            <input type="text" id="langueInput" class="form-control form-control-sm" placeholder="Français">
+          </div>
+          <div class="col-md-4">
+            <label for="assigneInput" class="form-label">Assigné à</label>
+            <input type="text" id="assigneInput" class="form-control form-control-sm" placeholder="Admin">
+          </div>
+          <div class="col-md-4">
+            <label for="equipeInput" class="form-label">Equipe</label>
+            <input type="text" id="equipeInput" class="form-control form-control-sm" placeholder="Equipe">
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeeemodel()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveclient()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>

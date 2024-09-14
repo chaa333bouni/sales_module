@@ -1,0 +1,762 @@
+<div class="devis-container">
+  <div class="row">
+    <!-- Increased form section width from col-md-7 to col-md-8 -->
+    <div class="col-md-9">
+      <!-- Status Bar -->
+      <div class="status-bar d-flex justify-content-between mb-4">
+        <span 
+          *ngFor="let status of ['brouillon', 'finalisé', 'confirmé', 'terminé', 'annulé']; let i = index"
+          [class.active]="currentStatus === status">
+          {{ i < 2 ? 'Devis' : i < 4 ? 'Commande' : 'Annulé' }} {{ status }}
+        </span>
+      </div>
+      
+      
+      <!-- Form Content for Brouillon Status -->
+      <div *ngIf="currentStatus === 'brouillon'">
+        <div class="row">
+          <div class="col-md-6">
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="sociétéInput" class="form-label">Société</label>
+                    <input type="text" id="sociétéInput" name="type" class="form-control" placeholder="axelor" list="typeOptions" required>
+                    <datalist id="typeOptions">
+                      <option value="axelor">
+                    </datalist>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="clientInput" class="form-label">Client</label>
+                    <input type="text" id="clientInput" name="client" [(ngModel)]="Clientobj.nom" class="form-control" placeholder="" list="clientOptions" [(ngModel)]="clientInput" required>
+                    <datalist id="clientOptions">
+                      <option value="appolo"></option>
+                      <option value="sss"></option>
+                    </datalist>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="contactinput" class="form-label">Contact Client</label>
+                    <input type="text" id="contactinput" name="type" class="form-control" placeholder="" list="typeOptio" required>
+                    <datalist id="typeOptio">
+                      <option value="vivo">
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="adressinput" class="form-label">Adresse principale/facturation</label>
+                <input type="text" id="adressinput" name="type" class="form-control" placeholder="" list="type" required>
+                <datalist id="type">
+                  <option value="créer">
+                </datalist>
+              </div>
+
+              <div class="mb-3">
+                <label for="descriptionInput" class="form-label">Adresse principale/facturation</label>
+                <textarea id="descriptionInput" name="description" rows="3" class="form-control" placeholder=""></textarea>
+              </div> 
+            
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="Deviseinput" class="form-label">Devise</label>
+                  <input type="text" id="Deviseinput" name="type" class="form-control" placeholder="" list="typeOptionss" required>
+                  <datalist id="typeOptionss">
+                    <option value="Euro">
+                  </datalist>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="typeInput" class="form-label">Liste de prix</label>
+                  <input type="text" id="typeInput" name="type" class="form-control" placeholder="" list="typeOptionsss" required>
+                  <datalist id="typeOptionsss">
+                    <option value="">
+                  </datalist>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="NumInput" class="form-label">Numéro de la version</label>
+              <input type="text" id="NumInput" name="type" class="form-control" placeholder="" >
+            </div>
+            <div class="mb-3">
+              <label for="adressevInput" class="form-label">Adresse de livraison</label>
+              <input type="text" id="adressevInput" name="type" class="form-control" placeholder="" list="type" required>
+              <datalist id="type">
+                <option value="créer">
+              </datalist>
+            </div>
+
+            <div class="mb-3">
+              <label for="description1Input" class="form-label">Adresse de livraison</label>
+              <textarea id="description1Input" name="description" rows="3" class="form-control" placeholder=""></textarea>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+      <!-- Sections Accordéon for Finalized Status -->
+      <div *ngIf="currentStatus === 'finalisé'">
+        <div class="row">
+          <div class="col-md-6">
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="sociétéInput" class="form-label">Société</label>
+                    <input type="text" id="sociétéInput" name="type" class="form-control" placeholder="axelor" list="typeOptions" required>
+                    <datalist id="typeOptions">
+                      <option value="axelor">
+                    </datalist>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="clientInput" class="form-label">Client</label>
+                    <input type="text" id="clientInput" name="client" class="form-control" placeholder="" list="clientOptions" [(ngModel)]="clientInput" required>
+                    <datalist id="clientOptions">
+                      <option value="appolo"></option>
+                      <option value="sss"></option>
+                    </datalist>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="contactinput" class="form-label">Contact Client</label>
+                    <input type="text" id="contactinput" name="type" class="form-control" placeholder="" list="typeOptio" required>
+                    <datalist id="typeOptio">
+                      <option value="vivo">
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="adressinput" class="form-label">Adresse principale/facturation</label>
+                <input type="text" id="adressinput" name="type" class="form-control" placeholder="" list="type" required>
+                <datalist id="type">
+                  <option value="créer">
+                </datalist>
+              </div>
+
+              
+            
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="Deviseinput" class="form-label">Devise</label>
+                  <input type="text" id="Deviseinput" name="type" class="form-control" placeholder="" list="typeOptionss" required>
+                  <datalist id="typeOptionss">
+                    <option value="Euro">
+                  </datalist>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="typeInput" class="form-label">Liste de prix</label>
+                  <input type="text" id="typeInput" name="type" class="form-control" placeholder="" list="typeOptionsss" required>
+                  <datalist id="typeOptionsss">
+                    <option value="">
+                  </datalist>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="NumInput" class="form-label">Numéro de la version</label>
+              <input type="text" id="NumInput" name="type" class="form-control" placeholder="" >
+            </div>
+            <div class="mb-3">
+              <label for="adressevInput" class="form-label">Adresse de livraison</label>
+              <input type="text" id="adressevInput" name="type" class="form-control" placeholder="" list="type" required>
+              <datalist id="type">
+                <option value="créer">
+              </datalist>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentStatus === 'confirmé'">
+        <div class="row">
+          <div class="col-md-6">
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="sociétéInput" class="form-label">Société</label>
+                    <input type="text" id="sociétéInput" name="type" class="form-control" placeholder="axelor" list="typeOptions" required>
+                    <datalist id="typeOptions">
+                      <option value="axelor">
+                    </datalist>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="clientInput" class="form-label">Client</label>
+                    <input type="text" id="clientInput" name="client" class="form-control" placeholder="" list="clientOptions" [(ngModel)]="clientInput" required>
+                    <datalist id="clientOptions">
+                      <option value="appolo"></option>
+                      <option value="sss"></option>
+                    </datalist>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="contactinput" class="form-label">Contact Client</label>
+                    <input type="text" id="contactinput" name="type" class="form-control" placeholder="" list="typeOptio" required>
+                    <datalist id="typeOptio">
+                      <option value="vivo">
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="adressinput" class="form-label">Adresse principale/facturation</label>
+                <input type="text" id="adressinput" name="type" class="form-control" placeholder="" list="type" required>
+                <datalist id="type">
+                  <option value="créer">
+                </datalist>
+              </div>
+
+              
+            
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="Deviseinput" class="form-label">Devise</label>
+                  <input type="text" id="Deviseinput" name="type" class="form-control" placeholder="" list="typeOptionss" required>
+                  <datalist id="typeOptionss">
+                    <option value="Euro">
+                  </datalist>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="typeInput" class="form-label">Liste de prix</label>
+                  <input type="text" id="typeInput" name="type" class="form-control" placeholder="" list="typeOptionsss" required>
+                  <datalist id="typeOptionsss">
+                    <option value="">
+                  </datalist>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="NumInput" class="form-label">Numéro de la version</label>
+              <input type="text" id="NumInput" name="type" class="form-control" placeholder="" >
+            </div>
+            <div class="mb-3">
+              <label for="adressevInput" class="form-label">Adresse de livraison</label>
+              <input type="text" id="adressevInput" name="type" class="form-control" placeholder="" list="type" required>
+              <datalist id="type">
+                <option value="créer">
+              </datalist>
+            </div>
+
+            
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="currentStatus === 'terminé'">
+        <div class="row">
+          <div class="col-md-6">
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="sociétéInput" class="form-label">Société</label>
+                    <input type="text" id="sociétéInput" name="type" class="form-control" placeholder="axelor" list="typeOptions" required>
+                    <datalist id="typeOptions">
+                      <option value="axelor">
+                    </datalist>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="clientInput" class="form-label">Client</label>
+                    <input type="text" id="clientInput" name="client" class="form-control" placeholder="" list="clientOptions" [(ngModel)]="clientInput" required>
+                    <datalist id="clientOptions">
+                      <option value="appolo"></option>
+                      <option value="sss"></option>
+                    </datalist>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="contactinput" class="form-label">Contact Client</label>
+                    <input type="text" id="contactinput" name="type" class="form-control" placeholder="" list="typeOptio" required>
+                    <datalist id="typeOptio">
+                      <option value="vivo">
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="adressinput" class="form-label">Adresse principale/facturation</label>
+                <input type="text" id="adressinput" name="type" class="form-control" placeholder="" list="type" required>
+                <datalist id="type">
+                  <option value="créer">
+                </datalist>
+              </div>
+
+              
+            
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="Deviseinput" class="form-label">Devise</label>
+                  <input type="text" id="Deviseinput" name="type" class="form-control" placeholder="" list="typeOptionss" required>
+                  <datalist id="typeOptionss">
+                    <option value="Euro">
+                  </datalist>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="typeInput" class="form-label">Liste de prix</label>
+                  <input type="text" id="typeInput" name="type" class="form-control" placeholder="" list="typeOptionsss" required>
+                  <datalist id="typeOptionsss">
+                    <option value="">
+                  </datalist>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="NumInput" class="form-label">Numéro de la version</label>
+              <input type="text" id="NumInput" name="type" class="form-control" placeholder="" >
+            </div>
+            <div class="mb-3">
+              <label for="adressevInput" class="form-label">Adresse de livraison</label>
+              <input type="text" id="adressevInput" name="type" class="form-control" placeholder="" list="type" required>
+              <datalist id="type">
+                <option value="créer">
+              </datalist>
+            </div>
+
+            
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="clientInput ">
+       
+      <div class="row">
+        
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="selectSection('vente')">Contenu</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="selectSection('achat')">taxe</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="selectSection('colisage')">facturation</button>
+        </div>
+     
+      
+        <div *ngIf="selectedSection === 'vente'" class="row g-3 mt-3">
+          <div class="row">
+            <div class="col-md-8">
+              <h5>Lignes de détails</h5>
+            </div>
+            <div class="col-md-4 text-right">
+              <a  class="text-dark" (click)="openModal()">Nouveau</a>
+              <a href="#" class="text-dark mx-3">Modifier</a>
+              <a href="#" class="text-dark">Supprimer</a>
+            </div>
+          </div>               
+          <table>
+            <thead>
+              <tr>
+                <th (click)="toggleMenu($event, 'code')">Code <span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'code'" class="sort-menu">
+                    <a (click)="sortTable('code', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('code', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <th (click)="toggleMenu($event, 'libelle')">Libellé produit <span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'libelle'" class="sort-menu">
+                    <a (click)="sortTable('libelle', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('libelle', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <th (click)="toggleMenu($event, 'libelle')">Qté<span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'libelle'" class="sort-menu">
+                    <a (click)="sortTable('libelle', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('libelle', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <th (click)="toggleMenu($event, 'libelle')">Unité<span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'libelle'" class="sort-menu">
+                    <a (click)="sortTable('libelle', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('libelle', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <th (click)="toggleMenu($event, 'libelle')">Prix unitaire H.T <span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'libelle'" class="sort-menu">
+                    <a (click)="sortTable('libelle', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('libelle', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <th (click)="toggleMenu($event, 'libelle')">Total H.T <span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'libelle'" class="sort-menu">
+                    <a (click)="sortTable('libelle', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('libelle', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <th (click)="toggleMenu($event, 'libelle')"> Date d'expedition <span class="arrow">&#9660;</span>
+                  <div *ngIf="isMenuOpen === 'libelle'" class="sort-menu">
+                    <a (click)="sortTable('libelle', 'asc')">Trier par ordre croissant</a>
+                    <a (click)="sortTable('libelle', 'desc')">Trier par ordre décroissant</a>
+                  </div>
+                </th>
+                <!-- Ajoutez les autres colonnes ici si nécessaire -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of sortedData">
+                <td>{{ item.code }}</td>
+                <td>{{ item.libelle }}</td>
+                <td>{{ item.qte }}</td>
+                <td>{{ item.unite }}</td>
+                <td>{{ item.prixHT }}</td>
+                <td>{{ item.totalHT }}</td>
+                <td>{{ item.dateExpedition }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div *ngIf="selectedSection === 'achat'" class="container mt-4">
+          <h5>taxe</h5>
+        </div>
+        <div *ngIf="selectedSection === 'colisage'" class="container mt-4">
+          <h5>facturation</h5>
+        </div>
+     </div>
+    </div>
+  </div>
+    <!-- Decreased Note interne section width from col-md-3 to col-md-2 -->
+    <div class="col-md-3">
+      <div *ngIf="currentStatus === 'brouillon'">
+      <div *ngIf="clientInput ">
+      <button class="btn btn-custom-blue text-white mb-3"(click)="saveclient()"(click)="changeStatus('finalisé')">finaliser</button>
+      <button  class="btn  btn-custom-rouge text-white mb-3 ">Annuler</button>
+      <div  class="totals">
+        <div class="total-row">
+          <span>Total HT {{totalHT}}</span>
+        </div>
+        <div class="total-row">
+          <span>Total T.V.A 0.000</span>
+        </div>
+        <div class="total-row">
+          <h5>Total T.T.C 0.000</h5>
+        </div>
+        <p>Current Client Input: {{ clientInput }}</p>
+      </div>
+      <div *ngFor="let item of items">
+        <div (click)="toggleItem(item)" class="list-item">
+          <h5>{{ item.title }}</h5>
+        </div>
+        <div *ngIf="item.isExpanded" class="content">
+          <!-- Content to display when item is expanded -->
+          <h6>{{ item.content }}</h6>
+        </div>
+        </div>
+      
+      <div class="list-item">
+        <h5>Note interne</h5>
+        
+        <!-- Toolbar Section -->
+        <div class="toolbar">
+          <button><b>B</b></button>
+          <button><i>I</i></button>
+          <button><u>U</u></button>
+          <button><s>S</s></button>
+        </div>
+        
+        <!-- Content Editable Section -->
+        <div class="content" contenteditable="true">
+
+        </div>
+      </div>
+      </div>
+      
+    </div>
+    <div *ngIf="currentStatus === 'finalisé'">
+      <button class="btn btn-custom-blue text-white mb-3"(click)="changeStatus('brouillon')">nouvelle </button>
+      <button class="btn btn-custom-blue text-white mb-3"(click)="changeStatus('confirmé')">confirmer </button>
+      <button  class="btn  btn-custom-rouge text-white mb-3 ">Annuler</button>
+      <div  class="totals">
+        <div class="total-row">
+          <span >Total HT {{ totalHT }}
+          </span>
+        </div>
+        <div class="total-row">
+          <span>Total T.V.A 0.000</span>
+        </div>
+        <div class="total-row">
+          <h5>Total T.T.C 0.000</h5>
+        </div>
+        <p>Current Client Input: {{ clientInput }}</p>
+      </div>
+      <div *ngFor="let item of items">
+        <div (click)="toggleItem(item)" class="list-item">
+          <h5>{{ item.title }}</h5>
+        </div>
+        <div *ngIf="item.isExpanded" class="content">
+          <h6>{{ item.content }}</h6>
+        </div>
+      </div>
+      <div class="list-item">
+        <h5>Note interne</h5>
+        
+        <!-- Toolbar Section -->
+        <div class="toolbar">
+          <button><b>B</b></button>
+          <button><i>I</i></button>
+          <button><u>U</u></button>
+          <button><s>S</s></button>
+        </div>
+        
+        <!-- Content Editable Section -->
+        <div class="content" contenteditable="true">
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentStatus === 'confirmé'">
+      <button class="btn btn-custom-blue text-white mb-3"(click)="changeStatus('terminé')">terminer</button>
+      
+      <div  class="totals">
+        <div class="total-row">
+          <span >Total HT {{ totalHT }}
+          </span>
+        </div>
+        <div class="total-row">
+          <span>Total T.V.A 0.000</span>
+        </div>
+        <div class="total-row">
+          <h5>Total T.T.C 0.000</h5>
+        </div>
+        <p>Current Client Input: {{ clientInput }}</p>
+      </div>
+      <div *ngFor="let item of items">
+        <div (click)="toggleItem(item)" class="list-item">
+          <h5>{{ item.title }}</h5>
+        </div>
+        <div *ngIf="item.isExpanded" class="content">
+          <h6>{{ item.content }}</h6>
+        </div>
+      </div>
+      <div class="list-item">
+        <h5>Note interne</h5>
+        
+        <!-- Toolbar Section -->
+        <div class="toolbar">
+          <button><b>B</b></button>
+          <button><i>I</i></button>
+          <button><u>U</u></button>
+          <button><s>S</s></button>
+        </div>
+        
+        <!-- Content Editable Section -->
+        <div class="content" contenteditable="true">
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentStatus === 'terminé'">
+     
+      <button  class="btn  btn-custom-rouge text-white mb-3 ">Annuler</button>
+      <div  class="totals">
+        <div class="total-row">
+          <span >Total HT {{ totalHT }}
+          </span>
+        </div>
+        <div class="total-row">
+          <span>Total T.V.A 0.000</span>
+        </div>
+        <div class="total-row">
+          <h5>Total T.T.C 0.000</h5>
+        </div>
+        <p>Current Client Input: {{ clientInput }}</p>
+      </div>
+      <div *ngFor="let item of items">
+        <div (click)="toggleItem(item)" class="list-item">
+          <h5>{{ item.title }}</h5>
+        </div>
+        <div *ngIf="item.isExpanded" class="content">
+          <h6>{{ item.content }}</h6>
+        </div>
+      </div>
+      <div class="list-item">
+        <h5>Note interne</h5>
+        
+        <!-- Toolbar Section -->
+        <div class="toolbar">
+          <button><b>B</b></button>
+          <button><i>I</i></button>
+          <button><u>U</u></button>
+          <button><s>S</s></button>
+        </div>
+        
+        <!-- Content Editable Section -->
+        <div class="content" contenteditable="true">
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+ </div>
+</div>
+<div class="modal fade" id="myModall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal Heading</h5>
+        <button type="button" class="btn-close" ></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Individu Section -->
+       <form [formGroup]="produitForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="Produit">produit</label>
+          <input id="Produit" formControlName="Produit" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label>
+            <input type="checkbox" id="figer" name="figer">
+            figer les champs
+          </label>        </div>
+        <div class="col-md-4">
+        <label for="type">Type</label>
+        <input id="type" formControlName="type" class="form-control" >
+        </div>
+      </div>
+      <div class="row">    
+          <label for="libelleProduit">Libellé produit</label>
+          <input id="libelleProduit" formControlName="libelleProduit" class="form-control">
+      </div>
+      <div class="row">    
+        <div class="col-md-2">
+          <label for="qte">Qté</label>
+          <input id="qte" formControlName="qte" type="number" class="form-control">
+        </div>
+        
+          <div class="col-md-2"><label for="unite">Unité</label>
+            <div class="input-group">
+              <input id="unite" formControlName="unite" class="form-control" >
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uniteModal">
+                <i class="bi bi-search"></i> <!-- Bootstrap icon for search -->
+              </button>
+            </div></div>
+            <div class="col-md-3"> <label for="prixUnitaireHT">Prix unitaire H.T.</label>
+              <input id="prixUnitaireHT" formControlName="prixUnitaireHT" type="number" class="form-control"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+    <label for="typeRemise">Type de remise</label>
+    <select id="typeRemise" formControlName="typeRemise" class="form-control">
+      <option value="Aucune remise">Aucune remise</option>
+      <option value="Remise 1">fixe</option>
+      <option value="Remise 2">en %</option>
+    </select>
+      </div>
+      </div>
+ <div class="row">
+  <div class="col col-md-4">
+    <label for="taxe">Taxe</label>
+    <input id="taxe" formControlName="taxe" class="form-control">
+  </div>
+
+  <div class="col col-md-4">
+    <label for="taxe">Totalht</label>
+    <input id="tax" [(ngModel)]="Clientobj.totalHt" formControlName="taxe" class="form-control">
+  </div>
+</div>
+<div class="row"><div class="col-md-4"> <label for="description" class="form-label">description</label>
+  <textarea id="description" name="description" rows="3" class="form-control" placeholder=""></textarea></div></div>
+
+</form>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" (click)="closeeemodel()" class="btn btn-secondary" >fermer</button>
+        <button type="button" (click)="saveclient()" class="btn btn-primary">ok</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Unité Modal -->
+<div class="modal fade" id="uniteModal" tabindex="-1" aria-labelledby="uniteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uniteModalLabel">Choisir une Unité</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Libellé sur impression</th>
+              <th>Type d'unité</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let unite of unites">
+              <td>{{ unite.libelle }}</td>
+              <td>{{ unite.type }}</td>
+              <td><button type="button" class="btn btn-primary btn-sm" (click)="selectUnite(unite)">Sélectionner</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

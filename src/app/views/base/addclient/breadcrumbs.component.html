@@ -1,0 +1,117 @@
+<div class="client-form-container">
+  <!-- Individu Section -->
+  <label for="clientTypeSelect" class="form-label">Type de Client</label>
+  <select id="clientTypeSelect" [(ngModel)]="selectedType" class="form-select form-select-sm">
+    <option value="société">Société</option>
+    <option value="individu">Individu</option>
+  </select>
+
+  <div *ngIf="selectedType === 'individu'">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label for="civiliteInput" class="form-label">Civilité</label>
+        <select id="civiliteInput" class="form-select form-select-sm">
+          <option value="Monsieur">Monsieur</option>
+          <option value="Madame">Madame</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="nomInput" class="form-label">Nom</label>
+        <input type="text" id="nomInput" [(ngModel)]="Clientobj.nom" class="form-control form-control-sm" placeholder="Nom">
+      </div>
+      <div class="col-md-4">
+        <label for="prenomInput" class="form-label">Prénom</label>
+        <input type="text" id="prenomInput" [(ngModel)]="Clientobj.prenom" class="form-control form-control-sm" placeholder="Prénom">
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="selectedType === 'société'">
+    <div class="mb-3">
+      <label for="nomSocieteInput" class="form-label">Nom de la Société</label>
+      <input type="text" id="nomSocieteInput"[(ngModel)]="Clientobj.societe"class="form-control form-control-sm" placeholder="Nom de la Société">
+    </div>
+  </div>
+<!-- Section de l'ajout de photo -->
+<div class="row g-3">
+  <div class="col-md-4">
+    <label for="photoInput" class="form-label">Photo de profil</label>
+    <input type="file" id="photoInput" (change)="onFileSelected($event)" class="form-control form-control-sm">
+  </div>
+  <div class="col-md-4 mt-3">
+    <!-- Prévisualisation de l'image -->
+    <img *ngIf="previewUrl" [src]="previewUrl" class="card-img-top" alt="Card image">
+  </div>
+</div>
+
+  <!-- Informations Section -->
+  <h5 class="mt-4">Informations</h5>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="adressePostaleInput" class="form-label">Adresses postales</label>
+      <textarea id="adressePostaleInput" rows="2" class="form-control form-control-sm"></textarea>
+    </div>
+    <div class="col-md-4">
+      <label for="telephoneInput" class="form-label">Tél. fixe</label>
+      <input type="text" id="telephoneInput" class="form-control form-control-sm" [(ngModel)]="Clientobj.numero_telephone" placeholder="+33100000000">
+    </div>
+    <div class="col-md-4">
+      <label for="faxInput" class="form-label">Fax</label>
+      <input type="text" id="faxInput" class="form-control form-control-sm" placeholder="+33000000000">
+    </div>
+  </div>
+  <div class="row g-3 mt-3">
+    <div class="col-md-4">
+      <label for="numeroMobileInput" class="form-label">N° Mobile</label>
+      <input type="text" id="numeroMobileInput" class="form-control form-control-sm" placeholder="+33100000000">
+    </div>
+    <div class="col-md-4">
+      <label for="emailInput" class="form-label">Email</label>
+      <input type="email" id="emailInput" class="form-control form-control-sm" [(ngModel)]="Clientobj.email" placeholder="whatever@example.com">
+    </div>
+    <div class="col-md-4">
+      <label for="siteWebInput" class="form-label">Site Web</label>
+      <input type="url" id="siteWebInput" class="form-control form-control-sm" placeholder="http://www.url.com">
+    </div>
+  </div>
+
+  <!-- Détails du tiers Section -->
+  <h5 class="mt-4">Détails du tiers</h5>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="categorieInput" class="form-label">Catégorie</label>
+      <input type="text" id="categorieInput" class="form-control form-control-sm" placeholder="Catégorie">
+    </div>
+    <div class="col-md-4">
+      <label for="secteurActiviteInput" class="form-label">Secteur d'Activité</label>
+      <input type="text" id="secteurActiviteInput" class="form-control form-control-sm" placeholder="Secteur d'Activité">
+    </div>
+    <div class="col-md-4">
+      <label for="provenanceInput" class="form-label">Provenance</label>
+      <input type="text" id="provenanceInput" class="form-control form-control-sm" placeholder="Provenance">
+    </div>
+  </div>
+
+  <!-- Paramètres Section -->
+  <h5 class="mt-4">Paramètres</h5>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="langueInput" class="form-label">Langue</label>
+      <input type="text" id="langueInput" class="form-control form-control-sm" placeholder="Français">
+    </div>
+    <div class="col-md-4">
+      <label for="assigneInput" class="form-label">Assigné à</label>
+      <input type="text" id="assigneInput" class="form-control form-control-sm" placeholder="Admin">
+    </div>
+    <div class="col-md-4">
+      <label for="equipeInput" class="form-label">Equipe</label>
+      <input type="text" id="equipeInput" class="form-control form-control-sm" placeholder="Equipe">
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons mt-4">
+    <button type="button" class="btn btn-secondary"[routerLink]="['/carta']">Close</button>
+    <button type="button" class="btn btn-primary" (click)="saveclient()"[routerLink]="['/carta']">Save</button>
+  </div>
+</div>

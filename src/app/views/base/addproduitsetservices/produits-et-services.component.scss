@@ -1,0 +1,17 @@
+.btn-outline-custom {
+    color: #000; /* Couleur du texte en noir */
+    border-color: #000; /* Couleur de la bordure en noir */
+  }
+  
+  .btn-outline-custom:hover {
+    background-color: #000; /* Couleur de fond en noir au survol */
+    color: #0e0505; /* Couleur du texte en blanc au survol */
+  }
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}

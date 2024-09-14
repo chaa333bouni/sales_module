@@ -1,0 +1,40 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>modifier/
+          supprimer</th>
+        <th>Référence</th>
+        <th>Nom</th>
+        <th>Tél.fixe</th>
+        <th>Email</th>
+        <th>Catégorie</th>
+        <th>Position_fiscale</th>
+        <th>N°siret</th>
+        <th>Adresse</th>
+        <th>Code_postal</th>
+        <th>Ville</th>
+        <th>Sociétés</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clientList; index as i">
+        <td>
+         
+          <button class="btn btn-outline-success btn-sm" >modifier</button>
+        </td>
+        <td>                  </td>
+        <td>{{ client.nom }} {{ client.prenom }}</td>
+        <td>{{ client.numero_telephone }}</td>
+        <td>{{ client.email }}</td>
+        <td>                  </td>
+        <td>                  </td>
+        <td>                  </td>
+        <td>                  </td>
+        <td>                  </td>
+        <td>                  </td>
+        <td>                  </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

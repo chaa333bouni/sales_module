@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <title>Top Bar with Icons</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .top-bar {
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          background-color: #f8f9fa;
+          border-bottom: 1px solid #dee2e6;
+      }
+      .top-bar .list-icon, .top-bar .add-icon {
+          margin-right: 15px;
+          font-size: 24px;
+          cursor: pointer;
+      }
+      .top-bar .add-icon {
+          margin-left: auto;
+      }
+      .card-container {
+          display: flex;
+          flex-wrap: wrap; /* Pour permettre aux cartes de passer à la ligne suivante si nécessaire */
+          gap: 20px; /* Espace entre les cartes */
+          padding: 20px;
+      }
+      .card {
+          width: 18rem;
+          margin: 0; /* Supprime la marge pour un meilleur contrôle de l'espacement avec flexbox */
+          flex: 1 1 calc(33.333% - 20px); /* Permet aux cartes de prendre un tiers de la largeur disponible */
+      }
+      .card-img-top {
+          max-height: 100px;
+          max-width: 100px;
+          object-fit: cover;
+      }
+  </style>
+  </head>
+  <body>
+      <div class="top-bar">
+          <span class="list-icon"[routerLink]="['/tooltips']">&#43;</span>
+      </div>
+  
+      <div class="card-container">
+          <div class="card" *ngFor="let item of clientList; let i = index; trackBy: trackByIndex">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  
+                  <div>
+                    <i class="fas fa-pen" style="color: black; cursor: pointer;" (click)="editClient(item)"></i>
+                    <i class="fas fa-times ms-2" style="color: black; cursor: pointer;" (click)="deleteClient(i)"></i>
+                  </div>
+                </div>
+                  <h5 class="card-title">Devis client #{{i}}</h5>
+                  <p class="card-text">
+                      <i class="fas fa-users"></i> {{item.nom}} → Devis brouillon
+                  </p>
+                  <p class="card-text">
+                      <span class="badge bg-danger">Non facturé</span>
+                      <span class="badge bg-danger">Non Livré</span>
+                  </p>
+                  <p class="card-text">
+                      HT : {{item.totalHt}} $<br />
+                      TTC : 0.000 $
+                  </p>
+                  <button class="btn btn-primary">Axelor</button>
+              </div>
+          </div>
+      </div>
+  </body>
+  
+</html>
+
+      
+  

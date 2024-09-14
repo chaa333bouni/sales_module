@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire Produit</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <label for="nameInput" class="form-label">Name</label>
+          <input type="text" id="nameInput" [(ngModel)]="Clientobj.nom" class="form-control" placeholder="Name" required>
+        </div>
+        <div class="col-md-6">
+          <label for="codeInput" class="form-label">Code</label>
+          <input type="text" id="codeInput" [(ngModel)]="Clientobj.code" class="form-control" placeholder="Code">
+        </div>
+      </div>
+
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <label for="typeInput" class="form-label">Typologie Produit</label>
+          <input type="text" id="typeInput" name="type" [(ngModel)]="Clientobj.type" class="form-control" placeholder="Typologie Produit" list="typeOptions" required>
+          <datalist id="typeOptions">
+            <option value="Présentation">
+            <option value="Article">
+          </datalist>
+        </div>
+        <div class="col-md-6">
+          <label for="familleComptableInput" class="form-label">Catégorisation</label>
+          <input type="text" id="familleComptableInput" name="familleComptable"[(ngModel)]="Clientobj.categorie" class="form-control" placeholder="Famille comptable">
+        </div>
+      </div>
+
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <label for="methodeApprovisionnementInput" class="form-label">Méthode d'approvisionnement</label>
+          <input type="text" id="methodeApprovisionnementInput" name="methodeApprovisionnement" class="form-control" placeholder="Méthode d'approvisionnement" list="typeOption" required>
+          <datalist id="typeOption">
+            <option value="Acheter">
+            <option value="Produire">
+            <option value="Produire et acheter">
+          </datalist>
+        </div>
+        <div class="col-md-6">
+          <label for="categorieProduitSelect" class="form-label">Catégorie Produit</label>
+          <select id="categorieProduitSelect" name="categorieProduit" class="form-select" required>
+            <option value="">Select Catégorie</option>
+            <!-- Add options here -->
+          </select>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label for="photoInput" class="form-label">Photo de profil</label>
+          <input type="file" id="photoInput" (change)="onFileSelected($event)" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-4 mt-3">
+          <!-- Prévisualisation de l'image -->
+          <img *ngIf="previewUrl" [src]="previewUrl" class="card-img-top" alt="Card image">
+        </div>
+      </div>
+      <div class="row g-3 mt-3 justify-content-start">
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="selectSection('vente')">Vente</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="selectSection('achat')">Achat/Coûts</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="selectSection('colisage')">colisage</button>
+        </div>
+      </div>
+      
+      <div *ngIf="selectedSection === 'vente'" class="row g-3 mt-3">
+        <div class="row g-3 mt-3">
+          <div class="col-md-6">
+            <h5>Dates produits</h5>
+          </div>  
+        </div>
+        <div class="row g-3 mt-3">
+          <div class="col-md-6">
+            <label for="dateMiseApplicationInput" class="form-label">Date de mise en application du produit</label>
+            <input type="date" id="dateMiseApplicationInput" name="dateMiseApplication" class="form-control">
+          </div>
+            <div class="col-md-6">
+              <h5>Ventes</h5>
+              <label class="form-label "></label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="nonRenouveleCheckbox" name="nonRenouvele" (change)="toggleAdditionalFields($event)">
+                <label class="form-check-label" for="nonRenouveleCheckbox">
+                  Vendable
+                </label>
+              </div>
+              <div *ngIf="isVendable" class="row g-3 mt-3">
+                <div class="col-md-6">
+                  <label for="prixVenteHT" class="form-label">Prix de vente HT</label>
+                  <input type="number" id="prixVenteHT" name="prixVenteHT" class="form-control" placeholder="0.000">
+                </div>
+                <div class="col-md-6">
+                  <label for="deviseVente" class="form-label">Devise de vente</label>
+                  <input type="text" id="deviseVente" name="deviseVente" class="form-control" placeholder="Devise">
+                </div>
+                <div class="col-md-12 mt-3">
+                  <label for="methodeAppro" class="form-label">Méthode d'appro. par défaut sur les commandes clients</label>
+                  <input type="text" id="methodeAppro" name="methodeAppro" class="form-control" placeholder="Aucune">
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row g-3 mt-3">
+          <div class="col-md-6">
+            <label for="dateFinApplicationInput" class="form-label">Date de fin d'application du produit</label>
+            <input type="date" id="dateFinApplicationInput" name="dateFinApplication" class="form-control">
+            
+            <!-- Adding margin-top for vertical spacing -->
+            <label class="form-label mt-3">Non renouvelé</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="nonRenouveleCheckbox" name="nonRenouvele">
+              <label class="form-check-label" for="nonRenouveleCheckbox">
+                Non renouvelé
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5>Unités</h5>
+            <label for="stockUnit" class="form-label">Unité de stock</label>
+            <input type="text" id="stockUnit" name="stockUnit" class="form-control" placeholder="Boîte de 12 Pces">
+         
+            <label for="purchaseUnit" class="form-label">Unité d'achat</label>
+            <input type="text" id="purchaseUnit" name="purchaseUnit" class="form-control" placeholder="Boîte de 6 Pces">
+          </div>
+        </div>
+        <div class="row g-3 mt-3">
+          <div class="col-md-6">
+            <label for="produitsParSocietesInput" class="form-label">version</label>
+            <input type="text" id="produitsParSocietesInput" name="produitsParSocietes" class="form-control" placeholder="Produits par sociétés">
+          </div>
+          <div class="col-md-6">
+            <label for="descriptionInput" class="form-label">Description</label>
+            <textarea id="descriptionInput" name="description" [(ngModel)]="Clientobj.description" rows="3" class="form-control" placeholder="Description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedSection === 'achat'" class="container mt-4">
+        <div class="row">
+          <!-- Achat Section -->
+          <div class="col-md-6">
+            <h5>Achat</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="achetableCheckbox" formControlName="achetable" (change)="toggleAdditionalFields($event)">
+              <label class="form-check-label" for="achetableCheckbox">
+                Achetable
+              </label>
+            </div>
+            <div *ngIf="isAchetable" class="mt-3">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="deviseAchat" class="form-label">Devise d'achat</label>
+                <input type="text" id="deviseAchat" formControlName="deviseAchat" class="form-control" placeholder="Devise">
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="dernierPrixAchat" class="form-label">Dernier prix d’achat</label>
+                <input type="number" id="dernierPrixAchat" formControlName="dernierPrixAchat" class="form-control" placeholder="0.000">
+              </div>
+              </div>
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="fournisseur" class="form-label">Fournisseur par défaut</label>
+                <input type="text" id="fournisseur" formControlName="fournisseur" class="form-control" placeholder="T0030 - SASAKI Components">
+              </div>
+              </div>
+            </div>
+              <div class="mb-3">
+                <label for="delaiLivraison" class="form-label">Délai de livraison par le fournisseur (jours)</label>
+                <input type="number" id="delaiLivraison" formControlName="delaiLivraison" class="form-control" placeholder="0">
+              </div>
+            </div>
+          </div>
+        
+          <!-- Frais Section -->
+          <div class="col-md-6">
+            <h5>Frais</h5>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="deviseAchat" class="form-label">Devise d'achat</label>
+                <input type="text" id="deviseAchat" formControlName="deviseAchat" class="form-control" placeholder="Devise">
+              </div>
+            </div>
+            </div>  
+            <div class="mb-3">
+                <label for="dernierPrixAchat" class="form-label">Dernier prix d’achat</label>
+                <input type="number" id="dernierPrixAchat" formControlName="dernierPrixAchat" class="form-control" placeholder="0.000">
+            </div> 
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="achetableCheckbox" formControlName="achetable" >
+                <label class="form-check-label" for="achetableCheckbox">
+                  Achetable
+                </label>
+              </div>
+            </div>
+            </div>  
+            <!-- Other fields -->
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedSection === 'colisage'" class="container mt-4">
+        <div class="row">
+          <!-- Achat Section -->
+          <div class="col-md-6">
+          <h5>Masse</h5>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+              </div>
+              </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="deviseAchat" class="form-label">Devise d'achat</label>
+                <input type="text" id="deviseAchat" formControlName="deviseAchat" class="form-control" placeholder="Devise">
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                <label for="dernierPrixAchat" class="form-label">Dernier prix d’achat</label>
+                <input type="number" id="dernierPrixAchat" formControlName="dernierPrixAchat" class="form-control" placeholder="0.000">
+              </div>
+              </div>
+            </div>
+            </div>
+          
+        
+          <!-- Frais Section -->
+          <div class="col-md-6">
+            <h5>Dimension de l'article</h5>
+            <div class="row">
+              
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="deviseAchat" class="form-label">Devise d'achat</label>
+                <input type="text" id="deviseAchat" formControlName="deviseAchat" class="form-control" placeholder="Devise">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+              </div>
+            </div>
+            </div>  
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                  <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                  <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+                </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                  <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="prixAchatHT" class="form-label">Prix d'achat HT</label>
+                  <input type="number" id="prixAchatHT" formControlName="prixAchatHT" class="form-control" placeholder="2.000">
+                </div>
+              </div>
+            </div>  
+            <!-- Other fields -->
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <button type="submit" (click)="saveclient()" [routerLink]="['/productcard']"class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

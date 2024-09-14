@@ -1,0 +1,88 @@
+/* cards.component.css */
+/* cards.component.css */
+/* Button Container */
+.button-container {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+/* Card Container */
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* This allows cards to wrap onto the next line */
+  gap: 1rem; /* Space between cards */
+  padding: 3rem;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+}
+
+/* Card */
+.card {
+  width: 14rem;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Prevents cards from shrinking */
+}
+
+/* Modal Styles */
+.modal-dialog {
+  max-width: 90vw; /* Adjust to your preference */
+}
+
+
+  .btn-custom-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  /* CSS */
+.button-container {
+  position: relative;
+}
+
+
+.btn-custom-sm {
+  position: absolute;
+  top: -5 px;
+  right: 0;
+}
+  
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-custom-sm {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: black;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .list-icon {
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: black;
+  }
+  
